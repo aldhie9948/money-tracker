@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Transaction {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  description String 
+  status String 
+  category String
+  nominal Int @default(0) 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
